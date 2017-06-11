@@ -1,0 +1,216 @@
+#zip-search-dropdown{
+	float:right;
+}
+
+#congress-member-info{
+	width: 100%;
+	margin-top: 0px;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+#congress-member-info th{
+	height: 35px;
+    font-size: 13px;
+    border-bottom: 3px solid grey;
+    /*color:white;
+*/  text-transform: uppercase;
+    font-weight:400;
+
+}
+
+.btm-fix{
+	margin-bottom: 10px;
+}
+
+.contact-info-heads{
+	text-align: left;
+	/*text-transform: uppercase;*/
+}
+
+#congress-database table{
+	border-collapse: collapse;
+}
+
+#congress-member-info td{
+   	font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+ 
+}
+
+.tablelRow{
+	 /*border-bottom: 1px solid #808080;*/
+	 cursor: pointer;
+	 transition: all .25s;
+}
+
+.tablelRow:hover{
+	background-color: #f3f2f2;
+}
+
+
+.g-congress-img{
+/*	max-width: 49px;*/
+	-webkit-filter: grayscale(50%); 
+    filter: grayscale(50%);
+    opacity: 0.8;
+   	max-width: 100%;
+    max-height: 100%;
+    /*max-height: 50px;*/
+}
+
+.congress_photo_div{	
+	height: 47.6px;
+	width: 39px;
+	/*margin-right: 5px;*/
+}
+
+.r-img{
+	background-color: #EB378B;
+
+}
+
+.d-img{
+	background-color: #00AAFF;
+}
+
+
+.g-congress-photo-container{
+	width:39px;
+}
+
+.g-congress-name{
+	width: 30%;
+	padding-left: 8px;
+
+}
+
+td.lowerRow{
+	background-color: #f3f2f2;
+	/*background-color: lightgrey;*/
+	/*border-bottom: 1px solid lightgrey;*/
+	
+}
+
+.expandable p{
+	font-size: 13px;
+}
+
+.chamber-filter-panel{
+	margin-bottom: 10px;
+}
+
+.chamber-filter{
+	/*background-color: #014551;*/
+	background-color: white;
+	/*color: white;*/
+	border:none;
+	border-radius: 8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-align: center;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	transition: all .25s;
+	cursor: pointer;
+	border: solid black 2px;
+}
+
+.chamber-filter:hover{
+	background-color: lightgrey;
+}
+
+.filter-enabled{
+	background-color: lightgrey;
+}
+
+.more-entries{
+	margin-top:30px;
+    display:block;
+}
+
+.hide{
+	display:none;
+}
+
+.url{
+	color: black;
+	/*margin: 20px !important;*/
+}
+
+i{
+	padding: 10px;
+}
+
+
+/*Chosen related stuff*/
+/*.control-panel{
+	margin-top: 50px;
+}*/
+.chosen-container.chosen-container-single .chosen-single {
+        text-align: left;
+        /*width:200px;*/
+        height: auto;
+        padding: 5px 0 3px 2px;
+        font-size: 1.1em;
+        line-height: 1.2em;
+        box-shadow: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        background: #fff;
+        font-family: roboto;
+        border: 1px solid black;
+    }
+
+/*.chosen-container.chosen-container-single .chosen-single div {
+
+    }*/
+
+.chosen-container.chosen-container-single .chosen-drop {
+    min-width: 200px;
+}
+    
+.chosen-container.chosen-container-single .chosen-results li {
+    font-size: 24px;
+    font-family: roboto;
+    text-align: left;
+}
+
+.chosen-container.chosen-container-single .chosen-results li{
+	font-size: 14px;
+    font-family: roboto;
+    text-align: left;
+}
+
+.chosen-container.chosen-container-single .chosen-results .highlighted{
+	background: #eee;
+    color: black;
+}
+
+.chosen-container.chosen-container-single .chosen-results .group-result{
+	text-transform: uppercase;
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single{
+	background-image: none !important;
+	/*background-color: white !important;*/
+	border: none !important;
+	/*border-bottom: solid black 1px !important;*/
+}
+
+.reset-search {
+  	pointer: none;
+    /*display: inline-block;*/
+}
+
+.transparent{
+	opacity: 0;
+	pointer: none;
+}
