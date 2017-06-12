@@ -360,6 +360,12 @@ a, a:visited, a:hover, a:active {
 	/*background-color: #faf9f8;*/
 }
 
+/*path.line
+{
+    fill: none;
+    stroke: #000;
+}
+*/
 /*
 #sticky-x{
 	width: 82%;

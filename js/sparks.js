@@ -124,15 +124,8 @@ var createXYdata = function(){
 }
 createXYdata()
 
+console.log(xy)
 
-
-
-// var data = {
-//     date: dateGenerator(),
-//     value: valueGenerator()
-// }
-
-// console.log(valueGenerator())
 
 var createSparks = {
     init: function(){
@@ -147,25 +140,33 @@ var createSparks = {
             sticky_axis_height = 40 - sticky_margin.top - sticky_margin.bottom;
 
         var x = d3.scaleTime()
-                .rangeRound([0, width]);
+                .range([0, width]);
 
         var y = d3.scaleLinear()
-            .rangeRound([height, 0]);
+            .range([height, 0]);
 
-        var line = d3.line()
-            // .curve(d3.curveCardinal)
-            .x(function(d) { return x(d.date) })
-            .y(function(d) { return y(d.value) });
+     
+        var parseTime = d3.timeParse("%c");
+
+        xy.forEach(function(d) {
+          d.Year = parseTime(d.date);
+          // d.Value = +d.Value;
+        });
+
+
+       
+        x.domain(d3.extent(xy, function(d,i) { return d.date }));
+
+        y.domain([0, d3.max(xy, function(d, i){ return d.value})]); 
+
 
 
         var area = d3.area()
-            .x(function(d) { return x(d.date); })
-            .y1(function(d) { return y(d.value); });
-       
-        x.domain(d3.extent(xy, function(d,i) { return d.date }));
-        y.domain(d3.extent(xy, function(d, i){ return d.value})); 
+            .x(function(d, i) { return x(d.date); })
+            .y0(height)
+            .y1(function(d, i) { return y(d.value); });
 
-        area.y0(y(0)); 
+
 
         d3.selectAll(".congress_chart_container")
             .each(renderSparks)
@@ -177,7 +178,7 @@ var createSparks = {
             .append('g')
             .attr("transform", "translate(" + margin.left + "," + sticky_margin.top + ")")
 
-        g.append("g")
+        var stickyXaix = g.append("g")
           .attr("transform", "translate(0," + sticky_axis_height + ")")
           .call(d3.axisTop(x).ticks(20))
         // .orient("top");
@@ -185,11 +186,14 @@ var createSparks = {
           .remove();
 
 
+
+
         // console.log(x)
 
         function renderSparks(){
 
-      
+
+
 
             var g = d3.select(this)
                 .append("svg")
@@ -198,14 +202,16 @@ var createSparks = {
                 .append('g')
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-            g.append("g")
+            var sparksXaxis = g.append("g")
               .attr("transform", "translate(0," + height + ")")
               .call(d3.axisBottom(x).ticks(20).tickSize(-(height+margin.top+margin.bottom), 0, 0))
               .classed("sparks-x-axis", true)
             // .orient("top");
-              // .select(".domain")
+              // .select(".domain")n
               .selectAll("text")
               .remove();
+
+              
 
 
 
@@ -214,22 +220,38 @@ var createSparks = {
 
             g.append("path")
               .datum(xy)
+              // .attr("class","area-line")  
               // .attr("fill", "steelblue")
               .attr("d", area);
 
+            d3.select(window).on("resize", resize);
+
+
+
+            // function resize(){
+
+            //     var $w;
+            //     var getChartWidth = function(){
+            //         if(window.innerWidth < 1200){
+            //             $w = 1000 - margin.left - margin.right
+            //         }else if (window.innerWidth < 1000){
+            //             $w = 300 - margin.left - margin.right
+            //         }
+            //     }
+            //     getChartWidth()
+            //     // d3.selectAll(".congress_chart_container").selectAll("svg").attr("width", $w + margin.left + margin.right)
+
+            //     g.attr("width", $w + margin.left + margin.right)
+            //     sparksXaxis.attr("width", $w + margin.left + margin.right).call(d3.axisBottom(x).ticks(20).tickSize(-(height+margin.top+margin.bottom), 0, 0))
+            //     x.rangeRound([0, $w]);
+
+
+            // }
+
+
+
 
              
-            // g.append("path")
-            //   .datum(xy)
-            //   .attr("fill", "none")
-            //   // .attr("stroke", "steelblue")
-            //   .attr("stroke-linejoin", "round")
-            //   .attr("stroke-linecap", "round")
-            //   .attr("stroke-width", .8)
-            //   .attr("class", "line")
-            //   .attr("d", line); 
-
-      
 
         }
 
@@ -241,4 +263,38 @@ var createSparks = {
 
     }
 }
+
+// function resize(){
+
+//     d3.selectAll(".congress_chart_container")
+//         .each(resizeSparks)
+
+//     function resizeSparks(){
+//         var $w = $(window).innerWidth()
+
+
+//         var x = d3.scaleTime()
+//                 .rangeRound([0, $w]);
+
+//         var area = d3.area()
+//                     .x(function(d) { return x(d.date); })
+//                     .y1(function(d) { return y(d.value); });
+
+//          // var area = d3.area()
+//          //    .x(function(d, i) { return x(d.date); })
+//          //    .y0(height)
+//          //    .y1(function(d, i) { return y(d.value); });
+
+//         // area.y0(y(0));
+
+//         d3.selectAll("path")
+//           .attr("d", area);
+
+//     }
+
+
+
+// }
+
+// window.addEventListener("resize", resize);
 

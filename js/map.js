@@ -12,17 +12,28 @@ $(document).ready(function() {
 var createMap = {
     init: function(us){
 
-    var margin = {top:80, right: 0, bottom: 30, left: 0},
-      width = 600 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+    // var margin = {top:80, right: 0, bottom: 30, left: 0},
+    //   width = 600 - margin.left - margin.right,
+    //   height = 500 - margin.top - margin.bottom;
+
+    var margin = {top: 0, left: 10, bottom: 0, right: 10}
+  , width = parseInt(d3.select('.national-map').style('width'))
+  , width = width - margin.left - margin.right
+  , mapRatio = .5
+  , height = width * mapRatio;
 
     var svg = d3.selectAll(".national-map").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
 
+    // var mapScale = 1300;
+    // var scale = width / 1050;
+
 
     var projection = d3.geoAlbersUsa()
-      .scale(800)
+      // .scale(800)
+       // .scale(mapScale * scale)
+        .scale(width)
       // .center([-100,31])
       .translate([width / 2, height / 2])
 
@@ -72,3 +83,45 @@ function getRandomColor() {
     })
 
 }
+
+
+function resize(){
+
+    d3.selectAll(".national-map")
+        .each(resizeNationalMaps)
+
+    function resizeNationalMaps(){
+
+        var margin = {top: 0, left: 10, bottom: 0, right: 10},
+        mapRatio = .5
+
+        var width = parseInt(d3.select('.national-map').style('width'))
+            width = width - margin.left - margin.right;
+            height = width * mapRatio ;
+
+        // update projection
+         var projection = d3.geoAlbersUsa()
+            .translate([width / 2, height / 2])
+            .scale(width);
+
+            var path = d3.geoPath()
+              .projection(projection);
+
+    //  d3.selectAll('.national-map')
+    //     .style('width', width + 'px')
+    //     .style('height', height + 'px');
+
+    // // resize the map
+    // map.select('.land').attr('d', path);
+    // map.selectAll('.state').attr('d', path);
+
+            d3.select(this).selectAll("path")
+              .attr("d", path);
+
+    }
+
+
+
+}
+
+window.addEventListener("resize", resize);
